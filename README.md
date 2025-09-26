@@ -94,6 +94,28 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
+Example to run a workflow.
+```python
+import asyncio
+import ipsdk
+
+async def main():
+    p = ipsdk.platform_factory(
+        host="automation-platform-20232.latest.uat.itential.io",
+        client_id="68d44f2f",
+        client_secret="72ebf401d3",
+        verify=False,
+        use_tls=True,
+        want_async=True
+    )
+    params={"workflow":"child","options":{"description":"","groups":[],"variables":{},"type":"automation"}}
+    res = await p.post("/operations-manager/jobs/start", json=params)
+    print("results :", res.json())
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
 The connection object supports the following HTTP methods:
 
 - `GET` - Sends a HTTP GET request to the server and returns the results
